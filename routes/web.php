@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChambreController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [ChambreController::class,"index"])->name('index');
+
+Route::get('/edit', function () {
+    return view('Chambre.edit');
+})->name("edit");
+
+Route::get('/create',[ChambreController::class,"create"])->name("create");
+Route::post('/create',[ChambreController::class,"store"])->name("save");
+
+
+
+Route::get('/pdf/{id}',[ChambreController::class,"pdf"])->name("pdf");
+
+
+
+Route::get('/afficher/{id}', [ChambreController::class,"show"])->name("show");
+Route::post('/delete', function () {
+    return view('Chambre.delete');
+})->name("delete");
+
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
